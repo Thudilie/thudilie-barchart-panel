@@ -5,6 +5,10 @@ export class BarchartCtrl extends PanelCtrl {
   constructor($scope, $injector) {
     super($scope, $injector);
   }
+
+  get message() {
+    return 'HHHHHHEEEE';
+  }
 }
 
 BarchartCtrl.templateUrl = 'module.html';

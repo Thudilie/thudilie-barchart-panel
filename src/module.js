@@ -1,5 +1,5 @@
-import {ClockCtrl} from './clock_ctrl';
+import {BarchartCtrl} from './barchart_ctrl';
 
 export {
-  ClockCtrl as PanelCtrl
+  BarchartCtrl as PanelCtrl
 };

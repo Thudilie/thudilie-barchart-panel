@@ -1,0 +1,20 @@
+# Ignore
+node_modules/*
+elasticsearch-6.4.0/*
+kibana-6.4.0-windows-x86_64/*
+desktop.ini
+
+#GRAFANA
+grafana-5.2.2/data/plugins/piechart-panel/*
+grafana-5.2.2/data/plugins/grafana-panel-plugin-1/node_modules
+grafana-5.2.2/data/sessions
+grafana-5.2.2/public/*
+grafana-5.2.2/scripts/*
+grafana-5.2.2/tools/*
+grafana-5.2.2/LICENSE.md
+grafana-5.2.2/NOTICE.md
+grafana-5.2.2/VERSION
+grafana-5.2.2/bin/*
+grafana-5.2.2/conf/*
+grafana-5.2.2/data/grafana.db
+grafana-5.2.2/data/log/*

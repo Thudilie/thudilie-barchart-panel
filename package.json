@@ -1,20 +1,28 @@
 {
-  "name": "Thudilie-barchart-panel",
+  "name": "thudilie-barchart-panel",
   "version": "1.0.0",
-  "description": "Clock Panel Plugin for Grafana",
+  "description": "Barchart Panel Plugin for Grafana",
   "main": "src/module.js",
   "scripts": {
     "lint": "eslint --color .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thudilie/thudilie-barchart-panel.git"
+  },
   "keywords": [
-    "clock",
     "grafana",
-    "plugin",
-    "panel"
+    "dashboards",
+    "d3.js",
+    "javaScript",
+    "typescript",
+    "activityData",
+    "plugin"
   ],
-  "author": "Raintank",
+  "author": "Thuy-Anh Nguyen",
   "license": "MIT",
+  "homepage": "https://github.com/Thudilie/thudilie-barchart-panel#readme",
   "devDependencies": {
     "babel": "~6.5.1",
     "babel-eslint": "^6.0.0",

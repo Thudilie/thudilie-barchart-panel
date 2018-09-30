@@ -1,1 +1,1 @@
-# thudilie-barchart-panel
+## Barchart Panel Plugin for Grafana

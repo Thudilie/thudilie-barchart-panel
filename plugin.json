@@ -1,0 +1,24 @@
+{
+  "type": "panel",
+  "name": "Thudilie-barchart-panel",
+  "id": "Thudilie-barchart-panel",
+
+  "info": {
+    "description": "Clock panel for grafana",
+    "author": {
+      "name": "Thuy-Anh Nguyen",
+      "url": "https://github.com/Thudilie/thudilie-barchart-panel.git"
+    },
+    "keywords": ["clock", "panel"],
+    "links": [
+      {"name": "Project site", "url": "https://github.com/grafana/clock-panel"},
+      {"name": "MIT License", "url": "https://github.com/grafana/clock-panel/blob/master/LICENSE"}
+    ],
+    "version": "0.1.0",
+    "updated": "2018-06-21"
+  },
+  "dependencies": {
+    "grafanaVersion": "3.x.x",
+    "plugins": [ ]
+  }
+}

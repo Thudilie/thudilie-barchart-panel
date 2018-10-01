@@ -1,6 +1,7 @@
 import {MetricsPanelCtrl} from 'app/plugins/sdk';
 import TimeSeries from 'app/core/time_series';
 import * as d3 from "d3";
+import rendering from './rendering';
 import './css/clock-panel.css!';
 
 export class BarchartCtrl extends MetricsPanelCtrl {
@@ -12,9 +13,7 @@ export class BarchartCtrl extends MetricsPanelCtrl {
   }
 
   onRender() {
-    const graph = this.elem.find('.barchart-graph')[0];
-    this.index += 1;
-    graph.innerHTML = 'Hello <b>world</b>!' + this.index;
+    console.log('einmalRendern');
   }
 
   onDataReceived(data) {
@@ -42,7 +41,7 @@ export class BarchartCtrl extends MetricsPanelCtrl {
   }
 
   link(scope, elem, attrs, ctrl) {
-    this.elem = elem;
+    rendering(scope, elem, attrs, ctrl);
   }
 }
 

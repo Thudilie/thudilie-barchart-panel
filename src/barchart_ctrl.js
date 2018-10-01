@@ -1,6 +1,6 @@
 import {MetricsPanelCtrl} from 'app/plugins/sdk';
 import TimeSeries from 'app/core/time_series';
-import 'jquery';
+import * as d3 from "d3";
 import './css/clock-panel.css!';
 
 export class BarchartCtrl extends MetricsPanelCtrl {
@@ -18,6 +18,7 @@ export class BarchartCtrl extends MetricsPanelCtrl {
   }
 
   onDataReceived(data) {
+    d3.select('.test').text('D3 start');
     console.log('this is my Data');
     console.log(data);
     this.series = data.map(this.seriesHandler.bind(this));

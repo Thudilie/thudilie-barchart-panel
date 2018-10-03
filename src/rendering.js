@@ -8,18 +8,17 @@ export default function link(scope, elem, attrs, ctrl) {
 
   let index = 0;
   const graph = elem.find('.barchart-graph')[0];
-  const myData = [{ 'width': '20px', 'height': '90px'}, {'width': '90px', 'height': '20px'}];
+  const myData = [20, 90];
+  const baressentials = {'height': 20, 'offset': 5};
 
   function createSVG() {
-    d3.select('#chart').append('svg').classed('barchart', 'true')
-    .selectAll('rect').data(myData).enter()
+    // select chart from html and append a svg
+    d3.select('#chart').append('svg').classed('barchart', 'true') // this svg will have the class barchart
+    .selectAll('rect').data(myData).enter() // select all what is not created go through data
     .append('rect')
-    .attr('width', function (data) {
-      return data.width;
-    })
-    .attr('height', function (data) {
-      return data.height;
-    })
+    .attr('width', function (data) { return data + 'px';})
+    .attr('height', function () { return baressentials.height;})
+    .attr('y', function (data, ind) { return ind * (baressentials.offset + baressentials.height);})
     .classed('bar', 'true');
   }
 

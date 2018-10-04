@@ -6,22 +6,29 @@ import './css/clock-panel.css!';
 export class BarchartCtrl extends MetricsPanelCtrl {
   constructor($scope, $injector) {
     super($scope, $injector);
+    this.neededData = [];
     this.events.on('data-received', this.onDataReceived.bind(this));
-    // this will happen always wenn the chart is rendering unattached from data-received
-    // this.events.on('render', this.onRender.bind(this));
   }
-  /*
-  onRender() {
-    console.log('einmalRendern');
-  }*/
 
   onDataReceived(data) {
+    this.neededData = [];
     console.log('this is my Data');
-    console.log(data);
-    this.series = data.map(this.seriesHandler.bind(this));
-    console.log('this is my formatted Data');
-    console.log(this.series[0].stats);
+    this.createDataSkeleton(data);
     this.render();
+  }
+
+  createDataSkeleton(series) {
+    const seriesdata = series.map(this.seriesHandler.bind(this));
+    let tempData = {};
+    for (let i = 0; i < series.length; i++) {// is the same as seriesdata.length;
+      tempData[series[i].target] = {
+        target: series[i].target,
+        metric: series[i].metric,
+        props: series[i].props
+      };
+      tempData[seriesdata[i].id].metricVal = seriesdata[i].stats.total;
+      this.neededData.push(tempData[series[i].target]);
+    }
   }
 
   seriesHandler(seriesData) {

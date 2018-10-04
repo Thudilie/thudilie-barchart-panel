@@ -7,11 +7,13 @@ export class BarchartCtrl extends MetricsPanelCtrl {
   constructor($scope, $injector) {
     super($scope, $injector);
     this.neededData = [];
+    this.valuesOnly = [];
     this.events.on('data-received', this.onDataReceived.bind(this));
   }
 
   onDataReceived(data) {
     this.neededData = [];
+    this.valuesOnly = [];
     console.log('this is my Data');
     this.createDataSkeleton(data);
     this.render();
@@ -28,6 +30,9 @@ export class BarchartCtrl extends MetricsPanelCtrl {
       };
       tempData[seriesdata[i].id].metricVal = seriesdata[i].stats.total;
       this.neededData.push(tempData[series[i].target]);
+      this.valuesOnly.push(tempData[seriesdata[i].id].metricVal);
+      console.log(this.neededData);
+      console.log(this.valuesOnly);
     }
   }
 

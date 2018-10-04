@@ -8,15 +8,15 @@ export default function link(scope, elem, attrs, ctrl) {
 
   let index = 0;
   const graph = elem.find('.barchart-graph')[0];
-  const myData = [20, 90];
 
   function createSVG() {
+    const myData = ctrl.valuesOnly;
     const chartwidth = parseInt(d3.select('#chart').style('width'), 10);
     const chartheight = parseInt(d3.select('#chart').style('height'), 10);
 
     // this d3method scales the data and makes the chart responsive
     var xScale = d3.scaleLinear()
-      .domain([10, d3.max(myData)]) // original information // max number of sequence
+      .domain([0, d3.max(myData)]) // original information // max number of sequence
       .range([0, chartwidth]); // where we wanne fit it into
 
     var yScale = d3.scaleBand()

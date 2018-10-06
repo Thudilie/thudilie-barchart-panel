@@ -14,8 +14,8 @@ export class BarchartCtrl extends MetricsPanelCtrl {
   onDataReceived(data) {
     this.dataArray = [];
     this.keyArray = [];
-    console.log('this is my Data');
     this.formatData(data);
+    this.makeWildcard();
     this.render();
   }
 
@@ -28,18 +28,18 @@ export class BarchartCtrl extends MetricsPanelCtrl {
       if (typeof temp[groupBy] === 'undefined') {
         temp[groupBy] = {};
         temp[groupBy].label = groupBy;
+        temp[groupBy].total = 0;
         this.dataArray.push(temp[groupBy]);
       }
 
       const filter = this.getFilter(series[i]);
       temp[groupBy][filter] = seriesdata[i].stats.total;
+      temp[groupBy].total += seriesdata[i].stats.total;
 
       if (!this.keyArray.includes(filter)) {
         this.keyArray.push(filter);
       }
     }
-    console.log(this.keyArray);
-    console.log(this.dataArray);
   }
 
   getGroupBy(series) {
@@ -51,6 +51,16 @@ export class BarchartCtrl extends MetricsPanelCtrl {
       }
     }
     return groupBy.trim();
+  }
+
+  makeWildcard() {
+    for (let x = 0; x < this.dataArray.length; x++) {
+      for (let y = 0; y < this.keyArray.length; y++) {
+        if (!this.dataArray[x].hasOwnProperty(this.keyArray[y])) {
+          this.dataArray[x][this.keyArray[y]] = 0;
+        }
+      }
+    }
   }
 
   getFilter(series) {

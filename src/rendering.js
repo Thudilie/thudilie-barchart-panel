@@ -10,14 +10,15 @@ export default function link(scope, elem, attrs, ctrl) {
   const graph = elem.find('.barchart-graph')[0];
 
   function createSVG() {
-    const keys = [ 'Under 5 Years', '5 to 13 Years', '14 to 17 Years' ];
-    const myData = defaultData();
+    const keys = ctrl.keyArray;
+    const myData = ctrl.dataArray;
     const chartwidth = parseInt(d3.select('#chart').style('width'), 10);
     const chartheight = parseInt(d3.select('#chart').style('height'), 10);
+    const anzahl = d3.max(myData, function(d) { return d.total; });
 
     // this d3method scales the data and makes the chart responsive
     var xScale = d3.scaleLinear()
-      .domain([0, d3.max(myData, function(d) { return d.total; })]) // original information // max number of sequence
+      .domain([0, anzahl]) // original information // max number of sequence
       .range([0, chartwidth]); // where we wanne fit it into
 
     var yScale = d3.scaleBand()

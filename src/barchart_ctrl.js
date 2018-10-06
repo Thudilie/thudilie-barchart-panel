@@ -6,14 +6,14 @@ import './css/clock-panel.css!';
 export class BarchartCtrl extends MetricsPanelCtrl {
   constructor($scope, $injector) {
     super($scope, $injector);
-    this.neededData = [];
-    this.valuesOnly = [];
+    this.dataArray = [];
+    this.keyArray = [];
     this.events.on('data-received', this.onDataReceived.bind(this));
   }
 
   onDataReceived(data) {
-    this.neededData = [];
-    this.valuesOnly = [];
+    this.dataArray = [];
+    this.keyArray = [];
     console.log('this is my Data');
     this.createDataSkeleton(data);
     this.render();
@@ -21,19 +21,43 @@ export class BarchartCtrl extends MetricsPanelCtrl {
 
   createDataSkeleton(series) {
     const seriesdata = series.map(this.seriesHandler.bind(this));
-    let tempData = {};
-    for (let i = 0; i < series.length; i++) {// is the same as seriesdata.length;
-      tempData[series[i].target] = {
-        target: series[i].target,
-        metric: series[i].metric,
-        props: series[i].props
-      };
-      tempData[seriesdata[i].id].metricVal = seriesdata[i].stats.total;
-      this.neededData.push(tempData[series[i].target]);
-      this.valuesOnly.push(tempData[seriesdata[i].id].metricVal);
-      console.log(this.neededData);
-      console.log(this.valuesOnly);
+    const temp = {};
+    for (let i = 0; i < series.length; i++) {
+      const groupBy = this.getGroupBy(series[i]);
+
+      if (typeof temp[groupBy] === 'undefined') {
+        temp[groupBy] = {};
+        temp[groupBy].label = groupBy;
+        this.dataArray.push(temp[groupBy]);
+      }
+
+      const filter = this.getFilter(series[i]);
+      temp[groupBy][filter] = seriesdata[i].stats.total;
+
+      if (!this.keyArray.includes(filter)) {
+        this.keyArray.push(filter);
+      }
     }
+    console.log(this.keyArray);
+    console.log(this.dataArray);
+  }
+
+  getGroupBy(series) {
+    let groupBy = series.target;
+    if (typeof series.props.filter !== 'undefined') {
+      const filter = series.props.filter;
+      if (groupBy.includes(filter)) {
+        groupBy = groupBy.replace(filter, '');
+      }
+    }
+    return groupBy.trim();
+  }
+
+  getFilter(series) {
+    if (typeof series.props.filter !== 'undefined') {
+      return series.props.filter;
+    }
+    return 'noFilter';
   }
 
   seriesHandler(seriesData) {
@@ -44,10 +68,6 @@ export class BarchartCtrl extends MetricsPanelCtrl {
     });
     series.flotpairs = series.getFlotPairs(this.panel.nullPointMode);
     return series;
-  }
-
-  get message() {
-    return JSON.stringify(this.series);
   }
 
   link(scope, elem, attrs, ctrl) {

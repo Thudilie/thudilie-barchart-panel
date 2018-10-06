@@ -15,11 +15,11 @@ export class BarchartCtrl extends MetricsPanelCtrl {
     this.dataArray = [];
     this.keyArray = [];
     console.log('this is my Data');
-    this.createDataSkeleton(data);
+    this.formatData(data);
     this.render();
   }
 
-  createDataSkeleton(series) {
+  formatData(series) {
     const seriesdata = series.map(this.seriesHandler.bind(this));
     const temp = {};
     for (let i = 0; i < series.length; i++) {

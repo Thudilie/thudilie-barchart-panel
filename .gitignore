@@ -6,7 +6,7 @@ desktop.ini
 
 #GRAFANA
 grafana-5.2.2/data/plugins/piechart-panel/*
-grafana-5.2.2/data/plugins/grafana-panel-plugin-1/node_modules
+grafana-5.2.2/data/plugins/thudlie-barchartstack-panel/node_modules/*
 grafana-5.2.2/data/sessions
 grafana-5.2.2/public/*
 grafana-5.2.2/scripts/*
